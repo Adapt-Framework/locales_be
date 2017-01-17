@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adapt_framework>
+    <bundle>
+        <name>locales_be</name>
+        <label>Belgium Locality</label>
+        <type>locale</type>
+        <version>1.0.0</version>
+        <namespace>\adapt\locales\be</namespace>
+        <version_status>release</version_status>
+        <availability>public</availability>
+        <description>Provides locality information for Belgium, such as phone number, address and date formats.</description>
+        <copyright>2017 Adapt Framework</copyright>
+        <license>MIT</license>
+        <website>http://www.adaptframework.com/documentaion/extentions/locales_be</website>
+        <depends_on>
+            <bundle>
+                <name>locales</name>
+                <version>1.0</version>
+            </bundle>
+            <bundle>
+                <name>currency_eur</name>
+                <version>1.0</version>
+            </bundle>
+            <bundle>
+                <name>adapt</name>
+                <version>2.0</version>
+            </bundle>
+        </depends_on>
+        <works_with>
+            <bundle>
+                <name>locales</name>
+                <version>1.0</version>
+            </bundle>
+        </works_with>
+        <schema>
+            <add>
+                <table name="data_type">
+                    <record>
+                        <name>be_phone</name>
+                        <based_on_data_type>varchar</based_on_data_type>
+                        <validator>be_phone</validator>
+                        <formatter></formatter>
+                        <unformatter>phone</unformatter>
+                        <datetime_format></datetime_format>
+                        <max_length>24</max_length>
+                    </record>
+                    <record>
+                        <name>be_date</name>
+                        <based_on_data_type>date</based_on_data_type>
+                        <validator>date</validator>
+                        <formatter>be_date</formatter>
+                        <unformatter>be_date</unformatter>
+                        <datetime_format>Y-m-d</datetime_format>
+                        <max_length></max_length>
+                    </record>
+                    <record>
+                        <name>be_time</name>
+                        <based_on_data_type>time</based_on_data_type>
+                        <validator>time</validator>
+                        <formatter>time</formatter>
+                        <unformatter></unformatter>
+                        <datetime_format>H:i</datetime_format>
+                        <max_length></max_length>
+                    </record>
+                    <record>
+                        <name>be_datetime</name>
+                        <based_on_data_type>datetime</based_on_data_type>
+                        <validator>datetime</validator>
+                        <formatter></formatter>
+                        <unformatter>datetime</unformatter>
+                        <datetime_format>Y-m-d H:i</datetime_format>
+                        <max_length></max_length>
+                    </record>
+                    <record>
+                        <name>be_postcode</name>
+                        <based_on_data_type>varchar</based_on_data_type>
+                        <validator>be_postcode</validator>
+                        <datetime_format></datetime_format>
+                        <max_length>8</max_length>
+                    </record>
+                </table>
+                <table name="country">
+                    <record>
+                        <name>be</name>
+                        <label>Belgium</label>
+                        <date_data_type_id get-from="data_type" where-name-is="be_date" />
+                        <time_data_type_id get-from="data_type" where-name-is="be_time" />
+                        <datetime_data_type_id get-from="data_type" where-name-is="be_datetime" />
+                        <currency_id get-form="currency" where-name-is="eur" />
+                    </record>
+                </table>
+                <table name="country_phone_data_type">
+                    <record>
+                        <country_id get-from="country" where-name-is="be" />
+                        <name>be_phone</name>
+                        <label>Phone</label>
+                        <data_type_id get-from="data_type" where-name-is="be_phone" />
+                    </record>
+                </table>
+                <table name="country_address_format">
+                    <record>
+                        <country_id get-from="country" where-name-is="be" />
+                        <priority>1</priority>
+                        <name>be_dispatching_info</name>
+                        <label>Dispatching info</label>
+                        <data_type_id get-from="data_type" where-name-is="varchar" />
+                        <max_length>64</max_length>
+                    </record>
+                    <record>
+                        <country_id get-from="country" where-name-is="be" />
+                        <priority>2</priority>
+                        <name>be_thoroughfare</name>
+                        <label>Thoroughfare</label>
+                        <data_type_id get-from="data_type" where-name-is="varchar" />
+                        <max_length>16</max_length>
+                    </record>
+                    <record>
+                        <country_id get-from="country" where-name-is="be" />
+                        <priority>3</priority>
+                        <name>be_street_number</name>
+                        <label>Street number</label>
+                        <data_type_id get-from="data_type" where-name-is="varchar" />
+                        <max_length>8</max_length>
+                    </record>
+                    <record>
+                        <country_id get-from="country" where-name-is="be" />
+                        <priority>4</priority>
+                        <name>be_box_number</name>
+                        <label>Box number</label>
+                        <data_type_id get-from="data_type" where-name-is="varchar" />
+                        <max_length>16</max_length>
+                    </record>
+                    <record>
+                        <country_id get-from="country" where-name-is="be" />
+                        <priority>5</priority>
+                        <name>be_postcode</name>
+                        <label>Postcode</label>
+                        <data_type_id get-from="data_type" where-name-is="be_postcode" />
+                        <max_length>16</max_length>
+                    </record>
+                    <record>
+                        <country_id get-from="country" where-name-is="be" />
+                        <priority>6</priority>
+                        <name>be_town</name>
+                        <label>Town</label>
+                        <data_type_id get-from="data_type" where-name-is="varchar" />
+                        <max_length>16</max_length>
+                    </record>
+                </table>
+            </add>
+        </schema>
+        <settings>
+            <category name="Default locales">
+                <setting>
+                    <name>locales.default_date_format</name>
+                    <label>Default date format</label>
+                    <default_value>be_date</default_value>
+                </setting>
+                <setting>
+                    <name>locales.default_time_format</name>
+                    <label>Default time format</label>
+                    <default_value>be_time</default_value>
+                </setting>
+                <setting>
+                    <name>locales.default_datetime_format</name>
+                    <label>Default date/time format</label>
+                    <default_value>be_datetime</default_value>
+                </setting>
+            </category>
+        </settings>
+    </bundle>
+</adapt_framework>
