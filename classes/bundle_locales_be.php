@@ -23,6 +23,7 @@ namespace adapt\locales\be{
                 
                 $this->sanitize->add_format('be_time',
                     function($value){
+                        if ($value === null  || $value == '') return null;
                         return \adapt\date::convert_date('H:i:s', 'H:i', $value);
                     },
                     "function(value){
@@ -32,6 +33,7 @@ namespace adapt\locales\be{
                 
                 $this->sanitize->add_format('be_datetime',
                     function($value){
+                        if ($value === null  || $value == '') return null;
                         return \adapt\date::convert_date('Y-m-d H:i:s', 'Y-m-d H:i', $value);
                     },
                     "function(value){
@@ -44,6 +46,7 @@ namespace adapt\locales\be{
                 
                 $this->sanitize->add_unformat('be_time',
                     function($value){
+                        if ($value === null  || $value == '') return null;
                         $value = preg_replace("/[^0-9]/", '', $value);
                         return \adapt\date::convert_date('Hi', 'H:i:s', $value);
                     },
@@ -55,6 +58,7 @@ namespace adapt\locales\be{
                 
                 $this->sanitize->add_unformat('be_datetime',
                     function($value){
+                        if ($value === null  || $value == '') return null;
                         $value = preg_replace("/[^0-9]/", '', $value);
                         return \adapt\date::convert_date('dmYHi', 'Y-m-d H:i:s', $value);
                     },
